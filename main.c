@@ -26,7 +26,20 @@ bool push(tpilha ** pp,int dado){
         return true;
     }
 }
+bool pop(tpilha * pp,int * valor){
+    tpilha aux;
+    if(pp == NULL){
+        return false;
+    }
+    else{
+        aux = *pp;
+        *valor = (*pp)->dado;
+        *pp = aux->prox;
+        free(aux);
+        return true;
+    }
 
+}
 
 void main() {
 
@@ -35,7 +48,20 @@ void main() {
 
     criar(&p);
 
+    push(&p,1);
+    printf("Pilha[%d]\n",p->dado);
+    push(&p,2);
+    printf("Pilha[%d]\n",p->dado);
+    push(&p,3);
+    printf("Pilha[%d]\n",p->dado);
+    push(&p,4);
+    printf("Pilha[%d]\n",p->dado);
     push(&p,5);
     printf("Pilha[%d]\n",p->dado);
+
+    pop(&p,&pegaValor);
+    printf("Valor [%d] retirado da pilha",pegaValor);
+
+
 
 }
