@@ -40,7 +40,15 @@ bool pop(tpilha * pp,int * valor){
     }
 
 }
+void imprimir(tpilha * pp){
+    tpilha aux;
+    aux = *pp;
+    while(aux != NULL){
+        printf("Pilha[%d]\n",aux->dado);
+        aux = aux->prox;
+    }
 
+}
 void main() {
 
     tpilha p;
@@ -48,20 +56,58 @@ void main() {
 
     criar(&p);
 
-    push(&p,1);
-    printf("Pilha[%d]\n",p->dado);
-    push(&p,2);
-    printf("Pilha[%d]\n",p->dado);
-    push(&p,3);
-    printf("Pilha[%d]\n",p->dado);
-    push(&p,4);
-    printf("Pilha[%d]\n",p->dado);
-    push(&p,5);
-    printf("Pilha[%d]\n",p->dado);
+    do{
+        printf("Entre 1-Empilhar / 2 - Desenpilhar / 3 - imprimir / -1 para sair\n");
+        scanf("%d",&op);
+        switch(op){
+            case 1:do{
+                printf("Digite o valor ou -1 para sair\n");
+                scanf("%d",&valor);
+                if(valor==-1){
+                    printf("Saindo...\n");
+                }
+                else{
+                    if(push(&p, valor)){
+                        printf("Pilha[%d]\n",p->dado);
+                    }
+                    else{
+                        printf("Nao foi possivel alocar memoria");
+                        valor=-1;
+                    }
 
-    pop(&p,&pegaValor);
-    printf("Valor [%d] retirado da pilha",pegaValor);
+                }
+            }while(valor!=-1);
+            break;
 
+            case 2:do{
+                printf("Digite 1 para desenpilhar e -1 para sair\n");
+                scanf("%d",&valor);
+                if(valor == -1){
+                    printf("Saindo ...\n");
+                }
+                else{
+                    if(valor == 1){
+                        if(pop(&p,&pegaValor)){
+                            printf("Valor [%d] retirado da pilha\n",pegaValor);
+                        }
+                        else{
+                            printf("\nPilha Vazia! \n");
+                        }
+                    }
+                    else{
+                        printf("valor invalido!\n");
+                    }
+                }
+            }while(valor!= -1);
+            break;
 
+            case 3:
+                imprimir(&p);
+                break;
+
+        }
+    }while(op!=-1);
+
+    system("pause");
 
 }
